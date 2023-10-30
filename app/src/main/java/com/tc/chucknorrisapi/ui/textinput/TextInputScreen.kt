@@ -40,15 +40,33 @@ import com.tc.chucknorrisapi.ui.randomjokes.RandomJokeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextInputScreen( navController: NavHostController) {
+
     val viewModel = hiltViewModel<TextInputViewModel>()
     var category by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            ,
         verticalArrangement = Arrangement.Center
     ) {
+
+
+
+        // Display the fetched jokes and their categories
+        val jokes by viewModel.joke.collectAsState(CategoriesModel())
+        Log.d(
+            "TextInputScreen",
+            "Category: ${jokes.categories?.joinToString()}, Joke: ${jokes.value}"
+        )
+        if (!jokes.id.isNullOrEmpty()) {
+            Text(
+                text = "Category: ${jokes.categories } \n Joke: ${jokes.value}",
+                textAlign = TextAlign.Center,
+                style = TextStyle(fontSize = 18.sp),
+                modifier = Modifier.padding(16.dp)
+            )
+        }
         // Text field to enter the category
         OutlinedTextField(
             value = category,
@@ -71,22 +89,7 @@ fun TextInputScreen( navController: NavHostController) {
             }
 
 
-        Spacer(modifier = Modifier.height(16.dp))
 
-        // Display the fetched jokes and their categories
-        val jokes by viewModel.joke.collectAsState(CategoriesModel())
-        Log.d(
-            "TextInputScreen",
-            "Category: ${jokes.categories?.joinToString()}, Joke: ${jokes.value}"
-        )
-        if (!jokes.id.isNullOrEmpty()) {
-            Text(
-                text = "Category: ${jokes.categories } \n Joke: ${jokes.value}",
-                textAlign = TextAlign.Center,
-                style = TextStyle(fontSize = 18.sp),
-                modifier = Modifier.padding(16.dp)
-            )
-        }
 
     }
 }

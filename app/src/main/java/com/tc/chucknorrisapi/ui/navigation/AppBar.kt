@@ -23,7 +23,7 @@ fun AppBar(
     TopAppBar(title = {
         Text(text = stringResource(id = R.string.app_name))
     },
-        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Magenta),
+        colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Blue),
         navigationIcon = {
             IconButton(onClick = onNavigationIconClick) {
                 Icon(imageVector = Icons.Default.Menu, contentDescription = "Toggle drawer" )

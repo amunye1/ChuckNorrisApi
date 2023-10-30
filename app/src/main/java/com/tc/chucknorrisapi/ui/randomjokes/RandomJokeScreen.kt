@@ -21,6 +21,7 @@ import com.tc.chucknorrisapi.data.model.ChuckNorrisItemModel
 
 @Composable
 fun RandomJokeScreen( navController: NavHostController) {
+
     val viewModel= hiltViewModel<RandomJokeViewModel>()
     val jokes by viewModel.jokes.collectAsState(ChuckNorrisItemModel())
 
