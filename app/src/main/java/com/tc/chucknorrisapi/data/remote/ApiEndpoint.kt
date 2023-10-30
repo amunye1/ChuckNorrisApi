@@ -8,12 +8,13 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 
+
 interface ApiEndpoint {
     @GET(ApiDetails.JOKES_ENDPOINT)
-    suspend fun getRandomJoke(): List <ChuckNorrisItemModel>
+    suspend fun getRandomJoke(): ChuckNorrisItemModel
 
     @GET(ApiDetails.CATEGORIES_ENDPOINT)
-    suspend fun getRandomJokeInCategory(@Query("category") category: String): List<ChuckNorrisItemModel>
+    suspend fun getRandomJokeInCategory(@Query("category") category: String): CategoriesModel
 
 
 }

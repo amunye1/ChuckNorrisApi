@@ -32,7 +32,7 @@ class NeverEndingListViewModel @Inject constructor(private val repository: Repos
             for (i in 1..batchSize) {
                 try {
                     val response = repository.getRandomJoke()
-                    response?.forEach { newJokes.add(it) }
+                    newJokes.add(response)
                 } catch (exception: Exception) {
                     // Handle the error
                 }

@@ -10,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.tc.chucknorrisapi.ui.navigation.AppNavigation
 import com.tc.chucknorrisapi.ui.navigation.SideNavigation
 import com.tc.chucknorrisapi.ui.neverendinglist.NeverEndingListScreen
 import com.tc.chucknorrisapi.ui.randomjokes.RandomJokeScreen
@@ -29,23 +30,23 @@ fun MainScreen(navController: NavHostController) {
                 SideNavigation(navController)
 
                 // Content area with padding
-                NavHost(
-                    navController = navController,
-                    startDestination = "randomJoke",
-                    modifier = Modifier.padding(16.dp) // Add padding here
-                ) {
-                    composable("randomJoke") {
-                        RandomJokeScreen(navController)
-                    }
-                    composable("textInput") {
-                        TextInputScreen(navController)
-                    }
-                    composable("neverEndingList") {
-                        NeverEndingListScreen(navController)
-                    }
-                }
+                AppNavigation()
+//                NavHost(
+//                    navController = navController,
+//                    startDestination = "randomJoke",
+//                    modifier = Modifier.padding(16.dp) // Add padding here
+//                ) {
+//                    composable("randomJoke") {
+//                        RandomJokeScreen(navController)
+//                    }
+//                    composable("textInput") {
+//                        TextInputScreen(navController)
+//                    }
+//                    composable("neverEndingList") {
+//                        NeverEndingListScreen(navController)
+//                    }
+//                }
             }
         }
     )
 }
-

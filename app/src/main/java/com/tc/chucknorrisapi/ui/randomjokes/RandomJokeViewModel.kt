@@ -10,17 +10,18 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class RandomJokeViewModel @Inject constructor(private val repository: Repository) :ViewModel() {
-    private val _joke = MutableStateFlow<List<ChuckNorrisItemModel>>(emptyList())
-    val jokes: StateFlow<List<ChuckNorrisItemModel>> = _joke
+    private val _joke = MutableStateFlow<ChuckNorrisItemModel>(ChuckNorrisItemModel())
+    val jokes: StateFlow<ChuckNorrisItemModel> = _joke
 
 
 
     fun getJoke(){
         viewModelScope.launch {
             val response = repository.getRandomJoke()
-            _joke.value= response ?: emptyList()
+            _joke.value= response ?: ChuckNorrisItemModel()
 
         }
     }

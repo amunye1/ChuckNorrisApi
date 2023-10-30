@@ -17,11 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.tc.chucknorrisapi.data.model.ChuckNorrisItemModel
 
 @Composable
 fun RandomJokeScreen( navController: NavHostController) {
     val viewModel= hiltViewModel<RandomJokeViewModel>()
-    val jokes by viewModel.jokes.collectAsState(emptyList())
+    val jokes by viewModel.jokes.collectAsState(ChuckNorrisItemModel())
 
     // Trigger the retrieval of a random joke when the screen is displayed
     DisposableEffect(Unit) {
@@ -35,15 +36,15 @@ fun RandomJokeScreen( navController: NavHostController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
-        if (jokes.isNotEmpty()) {
-            jokes.first().value?.let {
-                Text(
-                    text = it, // Assuming the first joke is the random one
-                    textAlign = TextAlign.Center,
-                    style = TextStyle(fontSize = 18.sp),
-                    modifier = Modifier.padding(16.dp)
-                )
-            }
+        if (!jokes.id.isNullOrEmpty()) {
+//            jokes.first().value?.let {
+            Text(
+                text = jokes.value ?: "", // Assuming the first joke is the random one
+                textAlign = TextAlign.Center,
+                style = TextStyle(fontSize = 18.sp),
+                modifier = Modifier.padding(16.dp)
+            )
+//            }
         } else {
             // Display a loading indicator or an error message if needed
             CircularProgressIndicator()

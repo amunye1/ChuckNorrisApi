@@ -19,7 +19,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.RandomJoke.route
+        startDestination = Screen.TextInput.route
     ) {
         composable(route = Screen.MainScreen.route) { MainScreen(navController) }
         composable(route = Screen.RandomJoke.route) { RandomJokeScreen(navController) }
@@ -33,15 +33,15 @@ fun SideNavigation(navController: NavHostController) {
     Column {
         Text("Menu Items:")
         Button(
-            onClick = { navController.navigate("randomJoke") },
+            onClick = { navController.navigate(Screen.RandomJoke.route) },
             content = { Text("Random Joke") }
         )
         Button(
-            onClick = { navController.navigate("textInput") },
+            onClick = { navController.navigate(Screen.TextInput.route) },
             content = { Text("Categories") }
         )
         Button(
-            onClick = { navController.navigate("neverEndingList") },
+            onClick = { navController.navigate(Screen.NeverEndingList.route) },
             content = { Text("Never-Ending List") }
         )
     }
