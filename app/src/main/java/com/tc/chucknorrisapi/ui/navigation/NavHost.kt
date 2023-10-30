@@ -28,6 +28,7 @@ fun AppNavigation() {
     }
 }
 
+/*
 @Composable
 fun SideNavigation(navController: NavHostController) {
     Column {
@@ -45,4 +46,4 @@ fun SideNavigation(navController: NavHostController) {
             content = { Text("Never-Ending List") }
         )
     }
-}
+}*/
