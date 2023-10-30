@@ -19,7 +19,7 @@ fun AppNavigation() {
 
     NavHost(
         navController = navController,
-        startDestination = Screen.TextInput.route
+        startDestination = Screen.MainScreen.route
     ) {
         composable(route = Screen.MainScreen.route) { MainScreen(navController) }
         composable(route = Screen.RandomJoke.route) { RandomJokeScreen(navController) }

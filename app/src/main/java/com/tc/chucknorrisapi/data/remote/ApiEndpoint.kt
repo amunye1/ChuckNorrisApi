@@ -13,7 +13,7 @@ interface ApiEndpoint {
     @GET(ApiDetails.JOKES_ENDPOINT)
     suspend fun getRandomJoke(): ChuckNorrisItemModel
 
-    @GET(ApiDetails.CATEGORIES_ENDPOINT)
+    @GET(ApiDetails.JOKES_ENDPOINT)
     suspend fun getRandomJokeInCategory(@Query("category") category: String): CategoriesModel
 
 

@@ -81,7 +81,7 @@ fun TextInputScreen( navController: NavHostController) {
         )
         if (!jokes.id.isNullOrEmpty()) {
             Text(
-                text = "Category: ${jokes.categories}, Joke: ${jokes.value}",
+                text = "Category: ${jokes.categories } \n Joke: ${jokes.value}",
                 textAlign = TextAlign.Center,
                 style = TextStyle(fontSize = 18.sp),
                 modifier = Modifier.padding(16.dp)
