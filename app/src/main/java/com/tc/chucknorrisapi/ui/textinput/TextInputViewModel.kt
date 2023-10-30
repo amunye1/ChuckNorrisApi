@@ -1,5 +1,6 @@
 package com.tc.chucknorrisapi.ui.textinput
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tc.chucknorrisapi.data.model.CategoriesModel
@@ -23,6 +24,7 @@ class TextInputViewModel @Inject constructor(private val repository: Repository)
                 _joke.value = response ?: CategoriesModel()
             } catch (exception: Exception) {
                 // Handle the error
+                Log.d("ViewModel Error", exception.message.toString())
             }
         }
     }

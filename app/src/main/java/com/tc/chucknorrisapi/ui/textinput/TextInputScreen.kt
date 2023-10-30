@@ -2,6 +2,7 @@ package com.tc.chucknorrisapi.ui.textinput
 
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 
 import androidx.compose.foundation.layout.Column
 
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -38,7 +40,7 @@ import com.tc.chucknorrisapi.ui.randomjokes.RandomJokeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextInputScreen( navController: NavHostController) {
-    val viewModel= hiltViewModel<TextInputViewModel>()
+    val viewModel = hiltViewModel<TextInputViewModel>()
     var category by remember { mutableStateOf("") }
 
     Column(
@@ -52,33 +54,39 @@ fun TextInputScreen( navController: NavHostController) {
             value = category,
             onValueChange = { category = it },
             label = { Text("Enter a category") },
-            modifier = Modifier.fillMaxWidth())
-    }
-
-    Spacer(modifier = Modifier.height(16.dp))
-
-    // Button to fetch jokes in the entered category
-    Button(
-        onClick = { viewModel.getJokeInCategory(category) },
-        colors = ButtonDefaults.buttonColors( Color(0XFF0F9D58)),
-        modifier = Modifier.size(50.dp, 30.dp)
-
-    ) {
-        Text(text = "Get Jokes")
-    }
-
-    Spacer(modifier = Modifier.height(16.dp))
-
-    // Display the fetched jokes and their categories
-    val jokes by viewModel.joke.collectAsState(CategoriesModel())
-    Log.d("TextInputScreen", "Category: ${jokes.categories?.joinToString()}, Joke: ${jokes.value}")
-    if (!jokes.id.isNullOrEmpty()) {
-        Text(
-            text = "Category: ${jokes.categories}, Joke: ${jokes.value}",
-            textAlign = TextAlign.Center,
-            style = TextStyle(fontSize = 18.sp),
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.fillMaxWidth()
         )
-    }
 
+
+
+
+            // Button to fetch jokes in the entered category
+            Button(
+                onClick = { viewModel.getJokeInCategory(category) },
+                colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)),
+                modifier = Modifier.fillMaxWidth()
+
+            ) {
+                Text(text = "Get Jokes")
+            }
+
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Display the fetched jokes and their categories
+        val jokes by viewModel.joke.collectAsState(CategoriesModel())
+        Log.d(
+            "TextInputScreen",
+            "Category: ${jokes.categories?.joinToString()}, Joke: ${jokes.value}"
+        )
+        if (!jokes.id.isNullOrEmpty()) {
+            Text(
+                text = "Category: ${jokes.categories}, Joke: ${jokes.value}",
+                textAlign = TextAlign.Center,
+                style = TextStyle(fontSize = 18.sp),
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+    }
 }
