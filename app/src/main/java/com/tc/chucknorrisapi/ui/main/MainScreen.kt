@@ -131,7 +131,7 @@ fun MainScreen(navController: NavHostController) {
         )
 
         Text(
-            text = "For the categories you can enter \n animal,career,celebrity,dev,explicit,fashion,food,history,money,movie,music,political,religion,science,sport,travel",
+            text = "For the categories page you can enter \n animal,career,celebrity,dev,explicit,fashion,food,history,money,movie,music,political,religion,science,sport,travel",
             modifier = Modifier.padding(30.dp), fontSize = 25.sp
         )
 
