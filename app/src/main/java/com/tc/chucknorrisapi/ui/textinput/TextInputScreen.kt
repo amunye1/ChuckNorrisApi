@@ -45,8 +45,8 @@ fun TextInputScreen( navController: NavHostController) {
     var category by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
+        modifier = Modifier.padding(32.dp)
+
             ,
         verticalArrangement = Arrangement.Center
     ) {
@@ -81,7 +81,7 @@ fun TextInputScreen( navController: NavHostController) {
             // Button to fetch jokes in the entered category
             Button(
                 onClick = { viewModel.getJokeInCategory(category) },
-                colors = ButtonDefaults.buttonColors(Color(0XFF0F9D58)),
+                colors = ButtonDefaults.buttonColors(Color(0xFF6F7FF7)),
                 modifier = Modifier.fillMaxWidth()
 
             ) {

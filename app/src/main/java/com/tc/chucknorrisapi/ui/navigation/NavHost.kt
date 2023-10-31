@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -42,7 +43,9 @@ fun AppNavigation() {
         topBar = {
             TopAppBar(
                 title = { Text(text = "Chuck Norris App" , fontSize = 25.sp) },
+
                 navigationIcon = {
+
                     IconButton(
                         onClick = {
                             scope.launch {
@@ -52,7 +55,8 @@ fun AppNavigation() {
                     ) {
                         Icon(imageVector = Icons.Default.Menu, contentDescription = "Open Drawer")
                     }
-                }
+                },
+                backgroundColor = Color(0xFF6F7FF7)
             )
         },
         drawerContent = {
