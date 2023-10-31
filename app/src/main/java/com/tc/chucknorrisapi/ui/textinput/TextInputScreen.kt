@@ -39,34 +39,35 @@ import com.tc.chucknorrisapi.ui.randomjokes.RandomJokeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TextInputScreen( navController: NavHostController) {
-
+fun TextInputScreen(navController: NavHostController) {
+    // Initialize the TextInputViewModel
     val viewModel = hiltViewModel<TextInputViewModel>()
+
+    // Create a mutable state variable to hold the category entered by the user
     var category by remember { mutableStateOf("") }
 
+    // Create a column layout for the content
     Column(
-        modifier = Modifier.padding(32.dp)
-
-            ,
+        modifier = Modifier.padding(32.dp),
         verticalArrangement = Arrangement.Center
     ) {
-
-
-
-        // Display the fetched jokes and their categories
+        // Collect the fetched jokes and categories from the ViewModel
         val jokes by viewModel.joke.collectAsState(CategoriesModel())
         Log.d(
             "TextInputScreen",
             "Category: ${jokes.categories?.joinToString()}, Joke: ${jokes.value}"
         )
+
+        // Display the fetched jokes and their categories if available
         if (!jokes.id.isNullOrEmpty()) {
             Text(
-                text = "Category: ${jokes.categories } \n Joke: ${jokes.value}",
+                text = "Category: ${jokes.categories} \n Joke: ${jokes.value}",
                 textAlign = TextAlign.Center,
                 style = TextStyle(fontSize = 18.sp),
                 modifier = Modifier.padding(16.dp)
             )
         }
+
         // Text field to enter the category
         OutlinedTextField(
             value = category,
@@ -75,21 +76,14 @@ fun TextInputScreen( navController: NavHostController) {
             modifier = Modifier.fillMaxWidth()
         )
 
-
-
-
-            // Button to fetch jokes in the entered category
-            Button(
-                onClick = { viewModel.getJokeInCategory(category) },
-                colors = ButtonDefaults.buttonColors(Color(0xFF6F7FF7)),
-                modifier = Modifier.fillMaxWidth()
-
-            ) {
-                Text(text = "Get Jokes")
-            }
-
-
-
-
+        // Button to fetch jokes in the entered category
+        Button(
+            onClick = { viewModel.getJokeInCategory(category) },
+            colors = ButtonDefaults.buttonColors(Color(0xFF6F7FF7)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "Get Jokes")
+        }
     }
 }
+

@@ -19,27 +19,29 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun DrawerHeader(){
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 64.dp),
+fun DrawerHeader() {
+    // Centered box with the title of the app
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 64.dp),
         contentAlignment = Alignment.Center
-
-    ){
-        Text(text = "Chuck Norris App", fontSize = 60.sp)
-
+    ) {
+        Text(text = "Chuck Norris App", fontSize = 60.sp) // Display the app title
     }
 }
 
 @Composable
 fun DrawerBody(
-    items:List<MenuItem>,
-    modifier: Modifier=Modifier,
-    itemTextStyle: TextStyle = TextStyle(fontSize = 18.sp),
-    onItemClick:(MenuItem) -> Unit
-){
-    LazyColumn(modifier){
-        items(items){item->
+    items: List<MenuItem>, // List of items to display in the drawer
+    modifier: Modifier = Modifier, // Optional modifier for custom styling
+    itemTextStyle: TextStyle = TextStyle(fontSize = 18.sp), // Text style for item titles
+    onItemClick: (MenuItem) -> Unit // Callback for item click
+) {
+    // Create a LazyColumn to display the list of items
+    LazyColumn(modifier) {
+        items(items) { item ->
+            // Row for each item with an icon, title, and click functionality
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -47,14 +49,13 @@ fun DrawerBody(
                         onItemClick(item)
                     }
                     .padding(16.dp)
-
-            ){
-                Icon(imageVector = item.icon, contentDescription = item.contentDescription )
-                Spacer(modifier = Modifier.width(16.dp))
+            ) {
+                Icon(imageVector = item.icon, contentDescription = item.contentDescription) // Display item icon
+                Spacer(modifier = Modifier.width(16.dp)) // Add spacing
                 Text(
-                    text =item.title,
-                    style=itemTextStyle,
-                    modifier= Modifier.weight(1f)
+                    text = item.title, // Display item title
+                    style = itemTextStyle, // Apply the specified text style
+                    modifier = Modifier.weight(1f) // Expand the title to fill available space
                 )
             }
         }

@@ -19,15 +19,18 @@ import androidx.navigation.NavHostController
 import com.tc.chucknorrisapi.ui.randomjokes.RandomJokeViewModel
 
 @Composable
-fun NeverEndingListScreen( navController: NavHostController) {
-    
+fun NeverEndingListScreen(navController: NavHostController) {
+    // Create a ViewModel instance using Hilt
+    val viewModel = hiltViewModel<NeverEndingListViewModel>()
 
-    val viewModel= hiltViewModel<NeverEndingListViewModel>()
+    // Collect the list of Chuck Norris jokes from the ViewModel
     val jokes by viewModel.jokes.collectAsState(emptyList())
 
+    // Create a LazyColumn composable to display the jokes
     LazyColumn(
         content = {
             items(jokes) { joke ->
+                // Display each Chuck Norris joke as a Text composable
                 Text(
                     text = joke.value ?: "No joke available",
                     textAlign = TextAlign.Center,
@@ -41,8 +44,8 @@ fun NeverEndingListScreen( navController: NavHostController) {
                 viewModel.fetchNextBatch()
             }
 
-
             if (viewModel.isLoading) {
+                // Display a loading indicator when data is being fetched
                 item {
                     CircularProgressIndicator(
                         modifier = Modifier.fillMaxWidth().padding(16.dp)
@@ -50,7 +53,6 @@ fun NeverEndingListScreen( navController: NavHostController) {
                 }
             }
         }
-
     )
 }
 

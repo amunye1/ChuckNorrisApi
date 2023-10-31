@@ -12,17 +12,21 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class RandomJokeViewModel @Inject constructor(private val repository: Repository) :ViewModel() {
+class RandomJokeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    // A MutableStateFlow to hold the random joke
     private val _joke = MutableStateFlow<ChuckNorrisItemModel>(ChuckNorrisItemModel())
+
+    // A StateFlow to expose the random joke to the UI
     val jokes: StateFlow<ChuckNorrisItemModel> = _joke
 
-
-
-    fun getJoke(){
+    // Function to retrieve a random Chuck Norris joke
+    fun getJoke() {
         viewModelScope.launch {
+            // Call the repository to get a random joke
             val response = repository.getRandomJoke()
-            _joke.value= response ?: ChuckNorrisItemModel()
 
+            // Update the _joke MutableStateFlow with the response or an empty model if null
+            _joke.value = response ?: ChuckNorrisItemModel()
         }
     }
 }

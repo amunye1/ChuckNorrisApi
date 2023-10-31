@@ -13,17 +13,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TextInputViewModel @Inject constructor(private val repository: Repository) :ViewModel(){
+class TextInputViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    // MutableStateFlow to hold the fetched joke in a specific category
     private val _joke = MutableStateFlow<CategoriesModel>(CategoriesModel())
+
+    // Expose the joke as a StateFlow for observation
     val joke: StateFlow<CategoriesModel> = _joke
 
+    // Function to fetch a joke based on a specific category
     fun getJokeInCategory(category: String) {
         viewModelScope.launch {
             try {
+                // Call the repository to retrieve a random joke in the specified category
                 val response = repository.getRandomJokeInCategory(category)
+                // Update the StateFlow with the fetched joke or an empty one if the response is null
                 _joke.value = response ?: CategoriesModel()
             } catch (exception: Exception) {
-                // Handle the error
+                // Handle the error, such as network issues or API errors
                 Log.d("ViewModel Error", exception.message.toString())
             }
         }

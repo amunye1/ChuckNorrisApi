@@ -20,9 +20,11 @@ import androidx.navigation.NavHostController
 import com.tc.chucknorrisapi.data.model.ChuckNorrisItemModel
 
 @Composable
-fun RandomJokeScreen( navController: NavHostController) {
+fun RandomJokeScreen(navController: NavHostController) {
+    // Initialize the ViewModel for the Random Joke screen
+    val viewModel = hiltViewModel<RandomJokeViewModel>()
 
-    val viewModel= hiltViewModel<RandomJokeViewModel>()
+    // Collect the random joke as a State
     val jokes by viewModel.jokes.collectAsState(ChuckNorrisItemModel())
 
     // Trigger the retrieval of a random joke when the screen is displayed
@@ -37,20 +39,18 @@ fun RandomJokeScreen( navController: NavHostController) {
             .padding(16.dp),
         verticalArrangement = Arrangement.Center
     ) {
+        // Check if a random joke is available
         if (!jokes.id.isNullOrEmpty()) {
-//            jokes.first().value?.let {
             Text(
-                text = jokes.value ?: "", // Assuming the first joke is the random one
+                text = jokes.value ?: "", // Display the value of the random joke
                 textAlign = TextAlign.Center,
                 style = TextStyle(fontSize = 18.sp),
                 modifier = Modifier.padding(16.dp)
             )
-//            }
         } else {
-            // Display a loading indicator or an error message if needed
+            // If no joke is available, display a loading indicator or an error message
             CircularProgressIndicator()
         }
-
-
     }
 }
+

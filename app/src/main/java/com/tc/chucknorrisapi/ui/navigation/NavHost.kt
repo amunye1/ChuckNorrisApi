@@ -34,18 +34,24 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AppNavigation() {
+    // Create a NavController for navigation
     val navController = rememberNavController()
+
+    // Create state for the Scaffold component
     val scaffoldState = rememberScaffoldState()
+
+    // Create a CoroutineScope for handling asynchronous operations
     val scope = rememberCoroutineScope()
 
+    // Create a Scaffold with a top app bar and drawer
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
+            // Top app bar with title and navigation icon
             TopAppBar(
-                title = { Text(text = "Chuck Norris App" , fontSize = 25.sp) },
-
+                title = { Text(text = "Chuck Norris App", fontSize = 25.sp) },
                 navigationIcon = {
-
+                    // Navigation icon to open the drawer
                     IconButton(
                         onClick = {
                             scope.launch {
@@ -56,10 +62,11 @@ fun AppNavigation() {
                         Icon(imageVector = Icons.Default.Menu, contentDescription = "Open Drawer")
                     }
                 },
-                backgroundColor = Color(0xFF6F7FF7)
+                backgroundColor = Color(0xFF6F7FF7) // Customize the top app bar's background color
             )
         },
         drawerContent = {
+            // Drawer content with a list of items for navigation
             DrawerHeader()
             DrawerBody(
                 items = listOf(
@@ -89,6 +96,7 @@ fun AppNavigation() {
                     )
                 ),
                 onItemClick = { item ->
+                    // Handle item clicks and navigate to different screens
                     when (item.id) {
                         "Home" -> navController.navigate(Screen.MainScreen.route)
                         "Random Jokes" -> navController.navigate(Screen.RandomJoke.route)
@@ -99,9 +107,10 @@ fun AppNavigation() {
             )
         },
         content = {it
-            Column { // Wrap the content in a Column
+            // Content area wrapped in a Column
+            Column {
                 Spacer(modifier = Modifier.height(8.dp)) // Add some spacing
-                // Content area with padding
+                // NavHost for handling navigation between different screens
                 NavHost(
                     navController = navController,
                     startDestination = Screen.MainScreen.route
@@ -115,3 +124,4 @@ fun AppNavigation() {
         }
     )
 }
+
